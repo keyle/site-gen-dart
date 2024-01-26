@@ -98,6 +98,10 @@ The C version could be much faster, I'm doing a ton of allocations that aren't s
 
 `Time (mean ± σ):      21.2 ms ±   0.2 ms    [User: 17.6 ms, System: 3.3 ms]`
 
-#### Dart version
+#### Dart version (master: async)
 
 `Time (mean ± σ):      30.8 ms ±   0.6 ms    [User: 21.8 ms, System: 8.5 ms]`
+
+#### Dart version (f/sync: sync only)
+
+`Time (mean ± σ):      30.0 ms ±   0.5 ms    [User: 21.8 ms, System: 8.5 ms]`
