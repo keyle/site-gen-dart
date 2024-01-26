@@ -16,9 +16,9 @@ Iterable<FileSystemEntity> findMarkdownFiles(String path) {
   return markdownFiles;
 }
 
-Future<String> glob(String filePath) async {
+String glob(String filePath) {
   final file = File(filePath);
-  return await file.readAsString();
+  return file.readAsStringSync();
 }
 
 String globSync(String filePath) {

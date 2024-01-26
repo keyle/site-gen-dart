@@ -4,7 +4,7 @@ import 'utils.dart';
 
 void generateBlogIndex(List<Article> articles, SettingsInfo settings) {
   var html = "<table>";
-  final blogPosts = articles.where((Article art) => art.isBlog!).toList();
+  List<Article> blogPosts = articles.where((a) => a.isBlog!).toList();
   blogPosts.sort((Article a, Article b) => b.pubDate!.compareTo(a.pubDate!));
 
   for (var blog in blogPosts) {
@@ -45,7 +45,8 @@ void generateRSSFeed(articles, settings) {
     <generator>site-gen-dart -- https://github.com/keyle/site-gen-dart</generator>
     <language>en-us</language>""";
 
-  final blogPosts = articles.where((Article art) => art.isBlog!).toList();
+  List<Article> blogPosts =
+      articles.where((Article art) => art.isBlog!).toList();
   blogPosts.sort((Article a, Article b) => b.pubDate!.compareTo(a.pubDate!));
 
   for (var blog in blogPosts) {

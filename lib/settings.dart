@@ -8,15 +8,13 @@ String? get userHome =>
     Platform.environment['HOME'] ?? // linux/macOS
     Platform.environment['USERPROFILE']; // Windows
 
-Future<SettingsInfo> loadSettings() async {
+SettingsInfo loadSettings() {
   try {
-    String path = "${userHome!}/.config/site-gen/settings.json";
-    final file = File(path);
-    String contents = await file.readAsString();
+    String contents = glob("${userHome!}/.config/site-gen/settings.json");
     Map<String, dynamic> settingsMap = jsonDecode(contents);
     SettingsInfo s = SettingsInfo.fromJson(settingsMap);
-    s.templateContents = await glob(s.template);
-    s.templateContentsIndex = await glob(s.templateIndex);
+    s.templateContents = glob(s.template);
+    s.templateContentsIndex = glob(s.templateIndex);
     return s;
   } catch (e) {
     print("Could not load settings.json, error: $e");

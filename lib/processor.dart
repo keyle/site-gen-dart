@@ -3,7 +3,7 @@ import 'package:markdown/markdown.dart';
 import 'data.dart';
 import 'utils.dart';
 
-Future<List<Article>> generateArticles(Iterable<FileSystemEntity> files) async {
+List<Article> generateArticles(Iterable<FileSystemEntity> files) {
   final List<Article> list = [];
 
   for (var filePath in files) {
@@ -11,13 +11,13 @@ Future<List<Article>> generateArticles(Iterable<FileSystemEntity> files) async {
     final article = Article(
         path: file.path,
         file: file.path.split('/').last,
-        markdown: await file.readAsString());
+        markdown: file.readAsStringSync());
     list.add(article);
   }
   return list;
 }
 
-Future<Article> processArticle(Article article, SettingsInfo settings) async {
+Article processArticle(Article article, SettingsInfo settings) {
   article.isBlog = article.markdown.contains('<x-blog-title>');
 
   // convert and place new html in place of content tag in template
@@ -68,7 +68,7 @@ Future<Article> processArticle(Article article, SettingsInfo settings) async {
   // save contents of html into the filepath folder / index.html
   final target = article.path.split(article.file).join('index.html');
   final file = File(target);
-  await file.writeAsString(article.html!);
+  file.writeAsStringSync(article.html!);
 
   return article;
 }
